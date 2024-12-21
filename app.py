@@ -6,22 +6,8 @@ from sentence_transformers import SentenceTransformer
 from transformers import pipeline
 
 # Load pre-trained models
-# Download the sentence_transformer.pkl file from Google Drive
-def download_model_from_drive():
-    url = "https://drive.google.com/file/d/19scNo_56kfUKhIQK9ImngOfSSIgr2Yfr/view?usp=drive_link"  # Replace with your file ID
-    output = "sentence_transformer.pkl"
-
-    # Check if the file already exists to avoid re-downloading
-    if not os.path.exists(output):
-        st.info("Downloading sentence transformer model from Google Drive...")
-        gdown.download(url, output, quiet=False)
-
-# Ensure gdown is installed
-try:
-    import gdown
-except ImportError:
-    import subprocess
-    subprocess.run(["pip", "install", "gdown"])
+with open('topic_model.pkl', 'rb') as f:
+    kmeans = pickle.load(f)
 
 with open('topic_labels.pkl', 'rb') as f:
     topic_labels = pickle.load(f)
@@ -32,7 +18,7 @@ with open('sentence_transformer.pkl', 'rb') as f:
 # Sentiment analysis pipeline with three classes
 sentiment_analyzer = pipeline(
     "sentiment-analysis",
-    model="distilbert-base-uncased-finetuned-sst-2-english",
+    model="bhadresh-savani/bert-base-uncased-emotion",
 )
 
 # Function to extract human messages from JSON structure
