@@ -42,7 +42,7 @@ for cluster_id in range(2):
 df['topic_label'] = df['topic'].map(cluster_meanings)
 
 # Sentiment Analysis: Use a model with three classes (positive, neutral, negative)
-sentiment_analyzer = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
+sentiment_analyzer = pipeline("sentiment-analysis", model="bhadresh-savani/bert-base-uncased-emotion")
 
 # Analyze sentiments
 def analyze_sentiment(message):
